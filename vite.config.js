@@ -7,7 +7,8 @@ export default defineConfig({
     proxy: {
       // anything that starts with /api will be forwarded to the backend
       '/api': {
-        target: 'http://localhost:5004',   // <-- backend host:port
+        target: 'http://localhost:5004',
+        target: 'https://url-shorter-backend-qgfe.onrender.com'   // <-- backend host:port
         
       },
     },

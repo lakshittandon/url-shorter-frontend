@@ -7,6 +7,7 @@ import "../index.css";
 const fetchMyUrls = () => api('/api/create/my');
 
 export default function UrlShortener() {
+  const backendBase = import.meta.env.VITE_API_URL;
   const [url, setUrl] = useState("");
   const [shortUrl, setShort] = useState("");
   const [loading, setLoading] = useState(false);
@@ -108,14 +109,13 @@ export default function UrlShortener() {
               {myUrls.map(u => (
                 <tr key={u._id}>
                   <td>
-                    <a
-                      href={u.shortUrl.startsWith("http") ? u.shortUrl : `${window.location.origin}/${u.shortUrl}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{ color: "#4f46e5" }}
-                    >
-                      {u.shortUrl}
-                    </a>
+                    <a href={u.shortUrl.startsWith("http") ? u.shortUrl : `${backendBase}/${u.shortUrl}`}
+  target="_blank"
+  rel="noopener noreferrer"
+  style={{ color: "#4f46e5" }}
+>
+  {u.shortUrl}
+</a>
                   </td>
                   <td style={{ wordBreak: "break-all" }}>{u.originalUrl}</td>
                   <td style={{ textAlign: "center" }}>{u.clicks}</td>

@@ -17,7 +17,7 @@ export default function Register() {
     try {
       const res = await api('/api/auth/register', {
         method: 'POST',
-        body: JSON.stringify(form),
+        body: form,
       });
       if (!res.ok) throw new Error(await res.text());
       const me = await checkAuth();  // get user info

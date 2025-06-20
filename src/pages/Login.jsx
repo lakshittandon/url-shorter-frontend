@@ -17,7 +17,7 @@ export default function Login() {
     try {
       const res = await api('/api/auth/login', {
         method: 'POST',
-        body: JSON.stringify(form),
+        body: form,
       });
       if (!res.ok) throw new Error(await res.text());
       const me = await checkAuth();

@@ -1,12 +1,24 @@
 const apiBase = import.meta.env.VITE_API_URL || "";
 
-export async function api(path, options) {
-  // If path starts with /api, make it absolute in prod
-  const url = path.startsWith("http")
-    ? path
-    : apiBase + path;
-  // For cookies (JWT auth), always include credentials
-  return fetch(url, { credentials: "include", ...options });
+// src/api/client.js
+export async function api(path, options = {}) {
+  const apiBase = import.meta.env.VITE_API_URL || "";
+  const url = path.startsWith("http") ? path : apiBase + path;
+
+  const opts = {
+    credentials: "include",
+    ...options
+  };
+
+  if (opts.body && typeof opts.body === "object") {
+    opts.headers = {
+      "Content-Type": "application/json",
+      ...(opts.headers || {})
+    };
+    opts.body = JSON.stringify(opts.body);
+  }
+
+  return fetch(url, opts);
 }
 
   export const checkAuth = () =>

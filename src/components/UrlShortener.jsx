@@ -42,7 +42,7 @@ export default function UrlShortener() {
     try {
       const res = await api("/api/create", {
         method: "POST",
-        body: JSON.stringify({ url }),
+        body: { url },
       });
       if (!res.ok) throw new Error();
       const data = await res.text();

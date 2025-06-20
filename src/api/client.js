@@ -5,6 +5,10 @@ export async function api(path, options = {}) {
   const apiBase = import.meta.env.VITE_API_URL || "";
   const url = path.startsWith("http") ? path : apiBase + path;
 
+  // Add these debug logs:
+  console.log("VITE_API_URL:", import.meta.env.VITE_API_URL);
+  console.log("fetching login URL:", url);
+
   const opts = {
     credentials: "include",
     ...options
